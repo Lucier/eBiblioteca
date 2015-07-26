@@ -1,0 +1,40 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+    <ui:define name="titulo">Novo empréstimo</ui:define>
+    
+    <ui:define name="corpo">
+    
+    <f:metadata>
+		<o:viewParam name="emprestimo" value="#{cadastroEmprestimoBean.emprestimo}" />
+		<f:event listener="#{cadastroEmprestimoBean.inicializar}" type="preRenderView" />
+	</f:metadata>
+    
+    	<h:form id="frmCadastroEmprestimo">
+	    	<h1>Novo empréstimo</h1>
+	    	
+	    	<p:messages autoUpdate="true" closable="true" />
+	    	
+	    	<ui:include src="/WEB-INF/template/emprestimo/BotoesEmprestimo.xhtml" />
+	    	
+	    	<ui:include src="/WEB-INF/template/emprestimo/CapaEmprestimo.xhtml" />
+	    	<br />
+	    	<br />
+	    	
+	    	
+	    	<p:tabView style="margin-top: 20px">
+	    		<p:tab title="Itens">
+	    			<ui:include src="/WEB-INF/template/emprestimo/ItenEmprestimo.xhtml" />
+	    		</p:tab>
+	    		<p:tab title="Observação">
+	    			<ui:include src="/WEB-INF/template/emprestimo/ObservacaoEmprestimo.xhtml" />
+	    		</p:tab>
+	    	</p:tabView>
+	    	
+    	</h:form>
+    </ui:define>
+</ui:composition>

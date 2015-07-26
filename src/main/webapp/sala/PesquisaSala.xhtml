@@ -1,0 +1,69 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">e-Biblioteca</ui:define>
+	<ui:define name="corpo">
+		<h:form id="frmPesquisa">
+			<h1>Pesquisa de salas</h1>
+			
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"
+						action="#{pesquisaSalaBean.pesquisar}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/sala/CadastroSala.xhtml" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<h:panelGrid columns="2" id="panel"
+				style="width:100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<h:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" value="#{pesquisaSalaBean.filter.nome}"
+					size="50" />
+			</h:panelGrid>
+
+			<p:dataTable id="salasTable"
+				value="#{pesquisaSalaBean.salasFiltradas}" var="sala"
+				style="margin-top: 20px" emptyMessage="Nenhuma sala encontrada."
+				rows="10" paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+				<p:column headerText="Nome" style="text-align: left; width: 100px">
+					<h:outputText value="#{sala.nome}" />
+				</p:column>
+
+				<p:column style="width: 5%; text-align: center">
+					<p:button outcome="/sala/CadastroSala" icon="ui-icon-pencil"
+						title="Editar">
+						<f:param name="sala" value="#{sala.id}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="confirmacaoExclusao.show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaSalaBean.salaSelecionada}" value="#{sala}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de sala"
+				message="Tem certeza que deseja excluir a sala #{pesquisaSalaBean.salaSelecionada.nome}?"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não"
+					onclick="confirmacaoExclusao.hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="confirmacaoExclusao.hide();"
+					action="#{pesquisaSalaBean.excluir}" process="@this"
+					update=":frmPesquisa:salasTable" ajax="false"/>
+			</p:confirmDialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<h:panelGrid columns="4" style="width:100%; margin-top: 20px"
+		columnClasses="rotulo, campo, rotulo, campo">
+<!--  	
+		<p:outputLabel value="Autor*" for="autor" />
+		<p:selectOneMenu id="autor" value="#{cadastroLivroBean.livro.autor}">
+			<f:selectItem itemLabel="Selecione um autor" />
+			<f:selectItems value="#{cadastroLivroBean.autores}" var="autor"
+				itemValue="#{autor}" itemLabel="#{autor.nome}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Editora*" for="editora" />
+		<p:selectOneMenu id="editora" value="#{cadastroLivroBean.livro.editora}">
+			<f:selectItem itemLabel="Selecione uma editora" />
+			<f:selectItems value="#{cadastroLivroBean.editoras}" var="editora"
+				itemValue="#{editora}" itemLabel="#{editora.nome}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Categoria*" for="categoria" />
+		<p:selectOneMenu id="categoria" value="#{cadastroLivroBean.livro.categoria}">
+			<f:selectItem itemLabel="Selecione uma categoria" />
+			<f:selectItems value="#{cadastroLivroBean.categorias}" var="categoria"
+				itemValue="#{categoria}" itemLabel="#{categoria.nome}" />
+		</p:selectOneMenu>
+-->
+		<p:fieldset legend="Informações pessoais">
+			<p:outputLabel value="nome*" for="nome" />
+			<p:inputText id="nome" />
+		</p:fieldset>
+
+		<p:fieldset legend="Informações de contato">
+			<p:outputLabel value="email*" for="email" />
+			<p:inputText id="email"  />
+		
+			<p:outputLabel value="Telefone*" for="telefone" />
+			<p:inputText id="telefone"  />
+		</p:fieldset>
+<!-- 
+		<p:outputLabel value="Nº de páginas*" for="paginas" />
+		<p:inputText id="paginas" value="#{cadastroLivroBean.livro.paginas}" size="24" />
+
+		<p:outputLabel value="CDD*" for="cdd" />
+		<p:inputText id="cdd" value="#{cadastroLivroBean.livro.cdd}" size="24"/>
+			
+		<p:outputLabel value="Quantidade*" for="quantidade" />
+		<p:inputText id="quantidade" value="#{cadastroLivroBean.livro.quantidadeEstoque}" size="24"/>
+
+		<p:outputLabel value="ISBN*" for="isbn" />
+		<p:inputText id="isbn" value="#{cadastroLivroBean.livro.isbn}" size="24" />
+-->			
+			<h:outputLabel />
+    		<h:outputLabel />
+    		<h:outputLabel />
+    		<h:outputLabel />
+    		<h:outputLabel />
+    		<h:outputLabel />
+    		<h:outputLabel />
+    		
+    		
+    		<h:outputLabel value="Os campos seguidos de * são de preenchimento obrigatório." />
+	</h:panelGrid>
+
+</ui:composition>

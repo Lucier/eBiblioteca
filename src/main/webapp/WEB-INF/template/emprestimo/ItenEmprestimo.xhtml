@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dataTable value="#{cadastroEmprestimoBean.emprestimo.itens}"
+		var="item" rowIndexVar="linha" id="tabelaItens">
+		<p:column headerText="ISBN" style="text-align: center; width: 100px">
+			<h:outputText value="#{item.livro.isbn}"
+				rendered="#{item.livroAssociado}" />
+
+			<p:inputText size="15" value="#{cadastroEmprestimoBean.isbn}"
+				label="ISBN" rendered="#{not item.livroAssociado}">
+				<p:ajax event="change" process="@this" update="tabelaItens"
+					listener="#{cadastroEmprestimoBean.carregarLivroPorIsbn}" />
+			</p:inputText>
+
+		</p:column>
+		<p:column headerText="Livro">
+			<h:outputText value="#{item.livro.titulo}"
+				rendered="#{item.livroAssociado}" />
+
+			<p:autoComplete styleClass="produto-tabela"
+				value="#{cadastroEmprestimoBean.livroLinhaEditavel}"
+				completeMethod="#{cadastroEmprestimoBean.completarLivro}"
+				var="livro" itemLabel="#{livro.titulo}" itemValue="#{livro}"
+				forceSelection="true" rendered="#{not item.livroAssociado}">
+				<p:ajax event="itemSelect" update="tabelaItens"
+					listener="#{cadastroEmprestimoBean.carregarLivroLinhaEditavel}" />
+			</p:autoComplete>
+		</p:column>
+		<p:column headerText="Autor" style="text-align: center; width: 120px">
+			<h:outputLabel value="#{item.livro.autor.nome}"
+				rendered="#{item.livroAssociado}" />
+		</p:column>
+
+		<p:column headerText="Editora"
+			style="text-align: center; width: 100px">
+			<h:outputLabel value="#{item.livro.editora.nome}"
+				rendered="#{item.livroAssociado}" />
+		</p:column>
+
+		<p:column headerText="Quantidade"
+			style="text-align: center; width: 100px">
+			<p:inputText size="8" value="#{item.quantidade}">
+				<p:ajax event="change" process="@this" update="tabelaItens"
+					listener="#{cadastroEmprestimoBean.atualizarQauntidade(item, linha)}" />
+			</p:inputText>
+		</p:column>
+
+		<p:column headerText="Estoque"
+			style="text-align: center; width: 100px">
+			<h:outputLabel value="#{item.livro.quantidadeEstoque}"
+				style="#{item.estoqueInsuficiente ? 'color: red' : ''}" />
+
+			<h:graphicImage library="images" name="alerta.png" id="semEstoque"
+				style="vertical-align: bottom; margin-left: 5px"
+				rendered="#{item.estoqueInsuficiente}" />
+
+			<p:tooltip for="semEstoque" value="Estoque insuficiente"
+				rendered="#{item.estoqueInsuficiente}" />
+		</p:column>
+
+	</p:dataTable>
+
+</ui:composition>

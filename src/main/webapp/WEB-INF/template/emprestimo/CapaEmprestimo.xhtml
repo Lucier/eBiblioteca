@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGrid columns="4" style="width: 100%; margin-top: 20px"
+		columnClasses="rotulo, campo, rotulo, campo">
+		
+		<p:outputLabel value="Status"/>
+        <h:outputText value= "#{cadastroEmprestimoBean.emprestimo.status.descricao}" />
+        <p:outputLabel />
+        <p:outputLabel />
+        
+		<p:outputLabel value="Data empréstimo" />
+			<p:calendar value="#{cadastroEmprestimoBean.emprestimo.dataEmprestimo}"/>
+		
+		<p:outputLabel value="Data de devolução" />
+		<p:calendar value="#{cadastroEmprestimoBean.emprestimo.dataDevolucao}"/>
+		
+		<p:outputLabel value="Bibliotecário" for="bibliotecario" />
+		<p:selectOneMenu id="bibliotecario" value="#{cadastroEmprestimoBean.emprestimo.bibliotecario}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems value="#{cadastroEmprestimoBean.bibliotecarios}" var="bibliotecario" 
+			itemValue="#{bibliotecario}" itemLabel="#{bibliotecario.nome}"/>
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Cliente" for="cliente" />
+		<p:autoComplete id="cliente" size="40" dropdown="true" 
+		value="#{cadastroEmprestimoBean.emprestimo.cliente}" completeMethod="#{cadastroEmprestimoBean.completarCliente}"
+		var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" forceSelection="true"/>
+
+	</h:panelGrid>
+
+</ui:composition>

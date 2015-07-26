@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><ui:insert name="titulo">Sistema de Pedidos de Venda</ui:insert></title>
+        <h:outputStylesheet library="css" name="sistema.css" />
+        <h:outputScript library="js" name="jquery.maskMoney.js"/>
+        <h:outputScript library="js" name="jquery-2.1.4.min.js"/>
+	</h:head>
+
+	<h:body>
+		<p:ajaxStatus styleClass="ajax-status" onsuccess="configurarMoeda()">
+			<f:facet name="start">
+				<h:graphicImage library="images" name="loading.gif"/>
+			</f:facet>
+			<f:facet name="complete">
+				<h:outputText value=""/>
+			</f:facet>
+		</p:ajaxStatus>
+	
+		<header>
+			<div style="float: left">
+				<h:link outcome="/Home">
+					<h:graphicImage library="images" name="ebiblioteca.png" />
+				</h:link>
+			</div>
+			
+			<div style="float: right; margin-right: 110px">
+				<span style="float: left; height: 30px; line-height: 30px; margin-right: 60px">
+				Usuário logado: Skyline
+				</span>
+				
+				<h:form style="display: inline-block">
+					<p:menubar styleClass="menu-sistema">
+						<p:submenu label="Cadastro">
+							<p:menuitem value="Autor" outcome="/autor/PesquisaAutor.xhtml"/>
+							<p:menuitem value="Categoria" outcome="/categoria/PesquisaCategoria.xhtml"/>
+							<p:menuitem value="Cliente" outcome="/cliente/CadastroCliente.xhtml"/>
+							<p:menuitem value="Curso" outcome="/curso/PesquisaCurso.xhtml"/>
+							<p:menuitem value="Editora" outcome="/editora/PesquisaEditora.xhtml"/>
+							<p:separator/>
+							<p:menuitem value="Livro" outcome="/livro/PesquisaLivro.xhtml"/>
+							<p:separator />
+							<p:menuitem value="Sala" outcome="/sala/PesquisaSala.xhtml"/>
+							<p:separator />
+							<p:menuitem value="Usuário" />
+						</p:submenu>
+						<p:submenu label="Movimentação">
+							<p:menuitem value="Novo empréstimo" outcome="/emprestimo/CadastroEmprestimo.xhtml"/>
+							<p:menuitem value="Pesquisa" outcome="/emprestimo/PesquisaEmprestimo.xhtml"/>
+						</p:submenu>
+						<p:submenu label="Relatórios">
+							<p:menuitem value="Livros emprestados" />
+						</p:submenu>
+						<p:menuitem value="Sair" />
+					</p:menubar>
+				</h:form>
+			</div>
+			<div style="clear: both"></div>
+		</header>
+
+		<div id="conteudo">
+			<ui:insert name="corpo"/>
+		</div>
+		
+		<p:separator style="margin-top: 20px"/>
+		
+		<footer>
+			e-Biblioteca - sistema de Controle de Acervo Bibliográfico
+		</footer>
+		
+		<script>
+			function configurarMoeda() {
+				$(".moeda").maskMoney({ decimal: ",", thousands: ".", allowZero: true });
+			}
+			
+			$(document).ready(function() {
+				configurarMoeda();
+			});
+		</script>
+	</h:body>
+	
+</html>

@@ -1,0 +1,86 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">e-Biblioteca</ui:define>
+	<ui:define name="corpo">
+		<h:form id="frmPesquisa">
+			<h1>Pesquisa de livros</h1>
+			
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"
+						action="#{pesquisaLivroBean.pesquisar}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/livro/CadastroLivro.xhtml" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<h:panelGrid columns="2" id="panel"
+				style="width:100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<h:outputLabel value="Título*" for="titulo" />
+				<p:inputText id="titulo" value="#{pesquisaLivroBean.filter.titulo}"
+					size="50" />
+
+				<h:outputLabel value="ISBN*" for="isbn" />
+				<p:inputText id="isbn" value="#{pesquisaLivroBean.filter.isbn}"
+					size="50" />
+			</h:panelGrid>
+
+			<p:dataTable id="livrosTable"
+				value="#{pesquisaLivroBean.livrosFiltrados}" var="livro"
+				style="margin-top: 20px" emptyMessage="Nenhum livro encontrado."
+				rows="10" paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+				<p:column headerText="Título" style="text-align: left; width: 100px">
+					<h:outputText value="#{livro.titulo}" />
+				</p:column>
+
+				<p:column headerText="Editora"
+					style="text-align: left; width: 100px">
+					<h:outputText value="#{livro.editora.nome}" />
+				</p:column>
+
+				<p:column headerText="Autor" style="text-align: left; width: 100px">
+					<h:outputText value="#{livro.autor.nome}" />
+				</p:column>
+
+				<p:column headerText="ISBN" style="text-align: left; width: 100px">
+					<h:outputText value="#{livro.isbn}" />
+				</p:column>
+
+				<p:column style="width: 5%; text-align: center">
+					<p:button outcome="/livro/CadastroLivro" icon="ui-icon-pencil"
+						title="Editar">
+						<f:param name="livro" value="#{livro.id}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="confirmacaoExclusao.show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaLivroBean.livroSelecionado}" value="#{livro}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de livro"
+				message="Tem certeza que deseja excluir o livro #{pesquisaLivroBean.livroSelecionado.titulo}?"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não"
+					onclick="confirmacaoExclusao.hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="confirmacaoExclusao.hide();"
+					action="#{pesquisaLivroBean.excluir}" process="@this"
+					update=":frmPesquisa:livrosTable" ajax="false"/>
+			</p:confirmDialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

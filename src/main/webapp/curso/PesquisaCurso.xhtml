@@ -1,0 +1,69 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">e-Biblioteca</ui:define>
+	<ui:define name="corpo">
+		<h:form id="frmPesquisa">
+			<h1>Pesquisa de cursos</h1>
+			
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"
+						action="#{pesquisaCursoBean.pesquisar}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/curso/CadastroCurso.xhtml" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<h:panelGrid columns="2" id="panel"
+				style="width:100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<h:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" value="#{pesquisaCursoBean.filter.nome}"
+					size="50" />
+			</h:panelGrid>
+
+			<p:dataTable id="cursosTable"
+				value="#{pesquisaCursoBean.cursosFiltrados}" var="curso"
+				style="margin-top: 20px" emptyMessage="Nenhum curso encontrado."
+				rows="10" paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+				<p:column headerText="Nome" style="text-align: left; width: 100px">
+					<h:outputText value="#{curso.nome}" />
+				</p:column>
+
+				<p:column style="width: 5%; text-align: center">
+					<p:button outcome="/curso/CadastroCurso" icon="ui-icon-pencil"
+						title="Editar">
+						<f:param name="curso" value="#{curso.id}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="confirmacaoExclusao.show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaCursoBean.cursoSelecionado}" value="#{curso}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de curso"
+				message="Tem certeza que deseja excluir o curso #{pesquisaCursoBean.cursoSelecionado.nome}?"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não"
+					onclick="confirmacaoExclusao.hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="confirmacaoExclusao.hide();"
+					action="#{pesquisaCursoBean.excluir}" process="@this"
+					update=":frmPesquisa:cursosTable" ajax="false"/>
+			</p:confirmDialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
