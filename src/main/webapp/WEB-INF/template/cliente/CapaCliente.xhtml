@@ -3,56 +3,45 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
-
+	
 	<h:panelGrid columns="4" style="width:100%; margin-top: 20px"
 		columnClasses="rotulo, campo, rotulo, campo">
-		
-		<p:outputLabel value="Tipo de cliente*" />
-		<h:selectOneRadio id="tipoCliente">
-			<f:selectItem id="aluno" itemLabel="Aluno" itemValue="aluno" />
-			<f:selectItem id="administrativo" itemLabel="Administrativo" itemValue="administrativo" />
-			<f:selectItem id="professor" itemLabel="Professor" itemValue="professor" />
-			<f:selectItem id="outros" itemLabel="Outors" itemValue="outros" />
-		</h:selectOneRadio>
-	
-		<p:outputLabel value="Autor*" for="autor" />
-		<p:selectOneMenu id="autor" value="#{cadastroLivroBean.livro.autor}">
-			<f:selectItem itemLabel="Selecione um autor" />
-			<f:selectItems value="#{cadastroLivroBean.autores}" var="autor"
-				itemValue="#{autor}" itemLabel="#{autor.nome}" />
+		<h:outputLabel value="Tipo cliente"></h:outputLabel>
+		<p:selectOneMenu id="tipoCliente" value="#{cadastroClienteBean.cliente.tipoDeCliente}">
+			<f:selectItem itemLabel="Administrativo" itemValue="administrativo" />
+			<f:selectItem itemLabel="Aluno" itemValue="aluno" />
+			<f:selectItem itemLabel="Professor" itemValue="Professor" />
+			<f:selectItem itemLabel="Outros" itemValue="outros" />
 		</p:selectOneMenu>
 
-		<p:outputLabel value="Editora*" for="editora" />
-		<h:selectOneMenu id="editora" value="#{cadastroLivroBean.livro.editora}">
-			<f:selectItem itemLabel="Selecione uma editora" />
-			<f:selectItems value="#{cadastroLivroBean.editoras}" var="editora"
-				itemValue="#{editora}" itemLabel="#{editora.nome}" />
-		</h:selectOneMenu>
+		<p:outputLabel value="Nome*" for="nome" />
+		<p:inputText id="nome" value="#{cadastroClienteBean.cliente.nome}" size="24"/>
 
-		<p:outputLabel value="Categoria*" for="categoria" />
-		<p:selectOneMenu id="categoria" value="#{cadastroLivroBean.livro.categoria}">
-			<f:selectItem itemLabel="Selecione uma categoria" />
-			<f:selectItems value="#{cadastroLivroBean.categorias}" var="categoria"
-				itemValue="#{categoria}" itemLabel="#{categoria.nome}" />
-		</p:selectOneMenu>
-
-		
-		
-		
-
-		
-
-		<p:outputLabel value="Nº de páginas*" for="paginas" />
-		<p:inputText id="paginas" value="#{cadastroLivroBean.livro.paginas}" size="24" />
-
-		<p:outputLabel value="CDD*" for="cdd" />
-		<p:inputText id="cdd" value="#{cadastroLivroBean.livro.cdd}" size="24"/>
+		<p:outputLabel value="Email*" for="email" />
+		<p:inputText id="email" value="#{cadastroClienteBean.cliente.email}" size="24"/>
 			
-		<p:outputLabel value="Quantidade*" for="quantidade" />
-		<p:inputText id="quantidade" value="#{cadastroLivroBean.livro.quantidadeEstoque}" size="24"/>
+		<p:outputLabel value="Telefone*" for="telefone" />
+		<p:inputMask mask="(99)99999-9999" id="telefone" value="#{cadastroClienteBean.cliente.telefone}" size="24"/>
 
-		<p:outputLabel value="ISBN*" for="isbn" />
-		<p:inputText id="isbn" value="#{cadastroLivroBean.livro.isbn}" size="24" />
+		<p:outputLabel value="Disciplina*" for="disciplina" />
+		<p:inputText id="disciplina" value="#{cadastroClienteBean.cliente.disciplina}"/>
+		
+		<p:outputLabel value="Função*" for="funcao" />
+		<p:inputText id="funcao" value="#{cadastroClienteBean.cliente.funcao}"/>
+		
+		<p:outputLabel value="Curso*" for="curso" />
+		<p:selectOneMenu id="curso" value="#{cadastroClienteBean.cliente.curso}">
+			<f:selectItem itemLabel="Selecione um curso" />
+			<f:selectItems value="#{cadastroClienteBean.cursos}" var="curso"
+				itemValue="#{curso}" itemLabel="#{curso.nome}" />
+		</p:selectOneMenu>
+		
+		<p:outputLabel value="Sala*" for="sala" />
+		<p:selectOneMenu id="sala" value="#{cadastroClienteBean.cliente.sala}">
+			<f:selectItem itemLabel="Selecione uma sala" />
+			<f:selectItems value="#{cadastroClienteBean.salas}" var="sala"
+				itemValue="#{sala}" itemLabel="#{sala.nome}" />
+		</p:selectOneMenu>
 		
 			<h:outputLabel />
     		<h:outputLabel />
@@ -64,6 +53,6 @@
     		
     		
     		<h:outputLabel value="Os campos seguidos de * são de preenchimento obrigatório." />
-	</h:panelGrid>
-
+	</h:panelGrid>	
+	
 </ui:composition>

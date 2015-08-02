@@ -2,6 +2,7 @@ package br.com.ajax.model;
 
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.ajax.validation.Telefone;
 
@@ -28,40 +27,32 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@NotEmpty
 	@Column(length = 80, nullable = false)
 	private String nome;
 
-	@NotEmpty
 	@Email
 	@Column(length = 100, nullable = false)
 	private String email;
 
-	@NotEmpty
 	@Telefone
 	@Column(length = 15, nullable = false)
 	private String telefone;
 
-	@NotEmpty
 	private String tipoDeCliente;
 
-	@NotEmpty
 	private String disciplina;
 
-	@NotEmpty
 	private String funcao;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@NotNull
 	@JoinColumn(name = "curso_id", nullable = false)
 	private Curso curso;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@NotNull
 	@JoinColumn(name = "sala_id", nullable = false)
 	private Sala sala;
 
-	@NotNull
+	@Nonnull
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco_id", nullable = false)
 	private Endereco endereco;

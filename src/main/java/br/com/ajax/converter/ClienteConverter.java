@@ -9,35 +9,36 @@ import br.com.ajax.model.Cliente;
 import br.com.ajax.repository.ClienteRepository;
 import br.com.ajax.util.cdi.CDIServiceLocator;
 
-@FacesConverter(forClass=Cliente.class)
-public class ClienteConverter implements Converter{
-	
+@FacesConverter(forClass = Cliente.class)
+public class ClienteConverter implements Converter {
+
 	private ClienteRepository clienteRepository;
-	
-	
 
 	public ClienteConverter() {
-		this.clienteRepository = (ClienteRepository) CDIServiceLocator.getBean(ClienteRepository.class);
+		clienteRepository = CDIServiceLocator.getBean(ClienteRepository.class);
 	}
 
 	@Override
-	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+	public Object getAsObject(FacesContext context, UIComponent component,
+			String value) {
 		Cliente retorno = null;
-		
-		if(value != null){
-			retorno = this.clienteRepository.potId(new Long(value));
+
+		if (value != null) {
+			Long id = new Long(value);
+			retorno = clienteRepository.porId(id);
 		}
-		
+
 		return retorno;
 	}
 
 	@Override
-	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		if(value != null){
-			return ((Cliente) value).getId().toString();
+	public String getAsString(FacesContext context, UIComponent component,
+			Object value) {
+		if (value != null) {
+			Cliente cliente = (Cliente) value;
+			return cliente.getId() == null ? null : cliente.getId().toString();
 		}
-		
+
 		return "";
 	}
-
 }

@@ -9,14 +9,25 @@
 
 	<ui:define name="corpo">
 	
+	<f:metadata>
+		<o:viewParam name="cliente" value="#{cadastroClienteBean.cliente}" />
+		<f:event listener="#{cadastroClienteBean.inicializar}" type="preRenderView" />
+	</f:metadata>
+	
 		<h:form>
-			<h1>Cadastro cliente</h1>
+			<h1>#{cadastroLivroBean.editando ? "Edição de livro" : "Novo livro"}</h1>
 			
 			<p:messages autoUpdate="true" closable="true" />
 
 			<ui:include src="/WEB-INF/template/cliente/BotoesCliente.xhtml" />
 
 			<ui:include src="/WEB-INF/template/cliente/CapaCliente.xhtml" />
+			
+			<p:tabView style="margin-top: 20px">
+				<p:tab title="Endereço">
+					<ui:include src="/WEB-INF/template/cliente/EnderecoCliente.xhtml" />
+				</p:tab>
+			</p:tabView>
 
 		</h:form>
 	</ui:define>

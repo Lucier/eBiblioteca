@@ -13,10 +13,10 @@ import javax.validation.constraints.Pattern;
 @Target({ ElementType.FIELD, ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {})
-@Pattern(regexp = "\\(\\d{2}\\)\\d{4}-\\d{4}")
+@Pattern(regexp = "\\(\\d{2}\\)\\d{5}-\\d{4}")
 public @interface Telefone {
 	@OverridesAttribute(constraint = Pattern.class, name = "message")
-	String message() default "{br.com.ebiblioteca.constraints.Telefone.message}";
+	String message() default "{br.com.ajax.constraints.Telefone.message}";
 	
 	Class<?>[] groups() default {};
 	

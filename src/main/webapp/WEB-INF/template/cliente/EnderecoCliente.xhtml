@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGrid columns="4" style="width:100%; margin-top: 20px"
+		columnClasses="rotulo, campo, rotulo, campo">
+		<h:outputLabel value="Logradouro" for="logradouro"/>
+		<p:inputText id="logradouro" value="#{cadastroClienteBean.cliente.endereco.logradouro}" />
+		
+		<h:outputLabel value="Numero" for="numero"/>
+		<p:inputText id="numero" value="#{cadastroClienteBean.cliente.endereco.numero}" />
+		
+		<h:outputLabel value="Complemento" for="complemento"/>
+		<p:inputText value="#{cadastroClienteBean.cliente.endereco.complemento}" />
+		
+		<h:outputLabel value="Cidade" for="cidade" />
+		<p:inputText value="#{cadastroClienteBean.cliente.endereco.cidade}" />
+		
+		<h:outputLabel value="UF" for="uf" />
+		<p:inputText id="uf" value="#{cadastroClienteBean.cliente.endereco.uf}" />
+		
+		<h:outputLabel value="CEP" for="cep" />
+		<p:inputMask mask="99999-999" value="#{cadastroClienteBean.cliente.endereco.cep}" />
+	</h:panelGrid>
+	
+</ui:composition>
