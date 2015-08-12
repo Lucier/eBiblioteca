@@ -43,7 +43,7 @@ public class ClienteRepository implements Serializable {
 				.createQuery(
 						"from Cliente " + "where upper(email) like :email",
 						Cliente.class)
-				.setParameter("email", email.toUpperCase() + "%")
+				.setParameter("email", email.toLowerCase() + "%")
 				.getResultList();
 	}
 
@@ -52,7 +52,7 @@ public class ClienteRepository implements Serializable {
 			return manager
 					.createQuery("from Cliente where upper(email) = :email",
 							Cliente.class)
-					.setParameter("email", email.toUpperCase())
+					.setParameter("email", email.toLowerCase())
 					.getSingleResult();
 		} catch (NoResultException e) {
 			return null;

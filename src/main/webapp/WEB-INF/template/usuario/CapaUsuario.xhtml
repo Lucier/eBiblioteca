@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<h:panelGrid columns="4" style="width:100%; margin-top: 20px"
+		columnClasses="rotulo, campo, rotulo, campo">
+
+		<p:outputLabel value="Nome*" for="nome" />
+		<p:inputText id="nome" value="#{cadastroUsuarioBean.usuario.nome}"
+			size="24" />
+
+		<p:outputLabel value="Email*" for="email" />
+		<p:inputText id="email" value="#{cadastroUsuarioBean.usuario.email}"
+			size="24" />
+
+		<p:outputLabel value="Senha*" for="senha" />
+		<p:password id="senha" value="#{cadastroUsuarioBean.usuario.senha}" />
+ 
+		<p:outputLabel value="Grupo*" for="grupos" />
+		<h:selectManyCheckbox id="grupos" value="#{cadastroUsuarioBean.gruposSelecionados}">
+			<f:selectItems value="#{cadastroUsuarioBean.grupos}" var="grupos"
+			itemLabel="#{grupos.nome}" itemValue="#{grupos.nome}" />
+		</h:selectManyCheckbox>
+		
+		
+		<h:outputLabel />
+		<h:outputLabel />
+		<h:outputLabel />
+		<h:outputLabel />
+		<h:outputLabel />
+		<h:outputLabel />
+		<h:outputLabel />
+		<h:outputLabel />
+		<h:outputLabel />
+
+
+		<h:outputLabel
+			value="Os campos seguidos de * são de preenchimento obrigatório." />
+	</h:panelGrid>
+
+</ui:composition>

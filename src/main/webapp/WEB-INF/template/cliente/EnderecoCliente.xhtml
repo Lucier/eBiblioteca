@@ -13,16 +13,16 @@
 		<p:inputText id="numero" value="#{cadastroClienteBean.cliente.endereco.numero}" />
 		
 		<h:outputLabel value="Complemento" for="complemento"/>
-		<p:inputText value="#{cadastroClienteBean.cliente.endereco.complemento}" />
+		<p:inputText id="complemento" value="#{cadastroClienteBean.cliente.endereco.complemento}" />
 		
 		<h:outputLabel value="Cidade" for="cidade" />
-		<p:inputText value="#{cadastroClienteBean.cliente.endereco.cidade}" />
+		<p:inputText id="cidade" value="#{cadastroClienteBean.cliente.endereco.cidade}" />
 		
 		<h:outputLabel value="UF" for="uf" />
 		<p:inputText id="uf" value="#{cadastroClienteBean.cliente.endereco.uf}" />
 		
 		<h:outputLabel value="CEP" for="cep" />
-		<p:inputMask mask="99999-999" value="#{cadastroClienteBean.cliente.endereco.cep}" />
+		<p:inputMask id="cep" mask="99999-999" value="#{cadastroClienteBean.cliente.endereco.cep}" />
 	</h:panelGrid>
 	
 </ui:composition>

@@ -5,27 +5,27 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import br.com.ajax.model.Usuario;
-import br.com.ajax.repository.UsuarioRepository;
+import br.com.ajax.model.Grupo;
+import br.com.ajax.repository.GrupoRepository;
 import br.com.ajax.util.cdi.CDIServiceLocator;
 
-@FacesConverter(forClass = Usuario.class)
-public class UsuarioConverter implements Converter {
+@FacesConverter(forClass = Grupo.class, value="grupoConverter")
+public class GrupoConverter implements Converter {
 
-	private UsuarioRepository usuarioRepository;
+	private GrupoRepository grupoRepository;
 
-	public UsuarioConverter() {
-		usuarioRepository = CDIServiceLocator.getBean(UsuarioRepository.class);
+	public GrupoConverter() {
+		grupoRepository = CDIServiceLocator.getBean(GrupoRepository.class);
 	}
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
-		Usuario retorno = null;
+		Grupo retorno = null;
 
 		if (value != null) {
 			Long id = new Long(value);
-			retorno = usuarioRepository.porId(id);
+			retorno = grupoRepository.porId(id);
 		}
 
 		return retorno;
@@ -35,8 +35,8 @@ public class UsuarioConverter implements Converter {
 	public String getAsString(FacesContext context, UIComponent component,
 			Object value) {
 		if (value != null) {
-			Usuario usuario = (Usuario) value;
-			return usuario.getId() == null ? null : usuario.getId().toString();
+			Grupo grupo = (Grupo) value;
+			return grupo.getNome() == null ? null : grupo.getNome().toString();
 		}
 
 		return "";
