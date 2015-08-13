@@ -19,10 +19,10 @@
 		<p:password id="senha" value="#{cadastroUsuarioBean.usuario.senha}" />
  
 		<p:outputLabel value="Grupo*" for="grupos" />
-		<h:selectManyCheckbox id="grupos" value="#{cadastroUsuarioBean.gruposSelecionados}">
+		<p:selectManyCheckbox id="grupos" value="#{cadastroUsuarioBean.usuario.grupos}">
 			<f:selectItems value="#{cadastroUsuarioBean.grupos}" var="grupos"
 			itemLabel="#{grupos.nome}" itemValue="#{grupos.nome}" />
-		</h:selectManyCheckbox>
+		</p:selectManyCheckbox>
 		
 		
 		<h:outputLabel />
